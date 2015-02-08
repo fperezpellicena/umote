@@ -1,9 +1,15 @@
 #ifndef SENSOR_PROXY_H
 #define	SENSOR_PROXY_H
 
+#include "bsp.h"
+
 void MeasureSensors(void);
 
-void EnableCO2(void);
+void EnableCO2Sensor(void);
+
+void StartCO2SensorDelayed(void);
+
+BOOL MustEnableCO2Sensor(void);
 
 #endif	/* SENSOR_PROXY_H */
 
