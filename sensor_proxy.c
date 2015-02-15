@@ -1,5 +1,6 @@
 #include "sensor_proxy.h"
 #include "sht/include/sht.h"
+#include "adc/include/averaged_adc.h"
 
 #define TIMER_CONFIG        T0_16BIT | T0_SOURCE_INT | TIMER_INT_ON | T0_PS_1_256
 #define OVF_RATE            9
@@ -17,6 +18,7 @@ static void EnableCO2(void);
 static BOOL CO2SensorTimerOverflow(void);
 
 static ShtData shtData;
+static uint16_t co2;
 
 void MeasureSensors(void) {
     EnableSHT11();
@@ -32,8 +34,8 @@ void EnableCO2Sensor(void) {
 }
 
 static void EnableCO2(void) {
-    TRISCbits.TRISC4 = 0;
-    PORTCbits.RC4 = 1;
+    TRISCbits.TRISC5 = 0;
+    PORTCbits.RC5 = 1;
 }
 
 void StartCO2SensorDelayed(void) {
@@ -57,16 +59,18 @@ static BOOL CO2SensorTimerOverflow(void) {
 }
 
 static void MeasureCO2(void) {
-
+    AdcInit();
+    AdcConvert(ADC_CH10, &co2);
+    AdcClose();
 }
 
 static void DisableCO2(void) {
-    PORTCbits.RC4 = 0;
+    PORTCbits.RC5 = 0;
 }
 
 static void EnableSHT11(void) {
-    TRISAbits.TRISA0 = 0;
-    PORTAbits.RA0 = 1;
+    TRISAbits.TRISA5 = 0;
+    PORTAbits.RA5 = 1;
 }
 
 static void MeasureSHT11(void) {
@@ -75,5 +79,5 @@ static void MeasureSHT11(void) {
 }
 
 static void DisableSHT11(void) {
-    PORTAbits.RA0 = 0;
+    PORTAbits.RA5 = 0;
 }

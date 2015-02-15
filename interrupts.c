@@ -1,7 +1,13 @@
 #include "sensor_proxy.h"
 #include "network_proxy.h"
 
-void interrupt handleInterrupt(void) {
+// Configure INT0 & enable it
+void EnableNetworkInterrupt(void) {
+    OpenRB0INT(PORTB_CHANGE_INT_ON | RISING_EDGE_INT | PORTB_PULLUPS_OFF);
+}
+
+// Interrupt handler
+void interrupt HandleInterrupt(void) {
     if (NetworkAwake()) {
         // Gather measurements
         MeasureSensors();

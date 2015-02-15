@@ -2,12 +2,12 @@
 #include <stdbool.h>
 
 #include "bsp.h"
+#include "interrupts.h"
 
 static void Idle(void);
 
 int main() {
-    // Configure INT0 & enable it
-    OpenRB0INT(PORTB_CHANGE_INT_ON | RISING_EDGE_INT | PORTB_PULLUPS_OFF);
+    EnableNetworkInterrupt();
     while (1) {
         Idle();
     }
