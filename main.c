@@ -1,6 +1,3 @@
-#include <stdint.h>
-#include <stdbool.h>
-
 #include "bsp.h"
 #include "interrupts.h"
 
@@ -8,13 +5,12 @@ static void Idle(void);
 
 int main() {
     EnableNetworkInterrupt();
+    EnableInterrupts();
     while (1) {
-        Idle();
+        //        Idle();
     }
     return 0;
 }
-
-
 
 /**
  * In RC_IDLE mode, the CPU is disabled but the peripherals continue to be

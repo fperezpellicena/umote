@@ -16,6 +16,7 @@ static void DisableCO2(void);
 static void StopCO2SensorDelayed(void);
 static void EnableCO2(void);
 static BOOL CO2SensorTimerOverflow(void);
+static void ClearCO2SensorTimerInterrupt(void);
 
 static ShtData shtData;
 static uint16_t co2;
@@ -39,23 +40,44 @@ static void EnableCO2(void) {
 }
 
 void StartCO2SensorDelayed(void) {
-    OpenTimer0(TIMER_CONFIG);
+//    OpenTimer0(TIMER_CONFIG);
+    T0CONbits.TMR0ON = 0;
+    T0CONbits.T08BIT = 1; // 16 bit mode
+    T0CONbits.T0CS = 0;
+    T0CONbits.PSA = 0;
+    T0CONbits.T0PS = 6; // Prescale x128
+    TMR0H = 0;
+    TMR0L = 0;
+    INTCONbits.TMR0IE = 1;
+    INTCONbits.TMR0IF = 0;
+    INTCON2bits.T0IP = 0;
+    T0CONbits.TMR0ON = 1;
 }
 
 static void StopCO2SensorDelayed(void) {
-    CloseTimer0();
+    T0CONbits.TMR0ON = 0;
+    INTCONbits.TMR0IE = 0;
 }
 
 BOOL MustEnableCO2Sensor(void) {
     if (CO2SensorTimerOverflow()) {
+        ClearCO2SensorTimerInterrupt();
         StartCO2SensorDelayed();
         overflowCount++;
     }
-    return overflowCount++ == OVF_RATE;
+    if (overflowCount == OVF_RATE) {
+        overflowCount = 0;
+        return true;
+    }
+    return false;
 }
 
 static BOOL CO2SensorTimerOverflow(void) {
     return INTCONbits.T0IF && INTCONbits.T0IE;
+}
+
+static void ClearCO2SensorTimerInterrupt(void) {
+     INTCONbits.TMR0IF = 0;
 }
 
 static void MeasureCO2(void) {

@@ -5,6 +5,8 @@
 
 BOOL NetworkAwake(void);
 
+void ClearNetworkInterrupt(void);
+
 void SendMeasures(void);
 
 #endif	/* NETWORK_PROXY_H */

@@ -1,7 +1,7 @@
 #pragma config WDTEN = OFF          //WDT disabled (enabled by SWDTEN bit)
 #pragma config WDTPS = 1024         //1:1024 (4 seconds)
 #pragma config DSWDTOSC = INTOSCREF //DSWDT uses INTOSC/INTRC as clock
-#pragma config DSWDTEN = ON         //Enabled
+#pragma config DSWDTEN = OFF         //Enabled
 #pragma config DSWDTPS = K524       //9 minutes
 
 #pragma config STVREN = ON          //stack overflow/underflow reset enabled

@@ -3,8 +3,8 @@
 #include <delays.h>
 
 #define SHT_DATA_PIN     PORTAbits.RA0
-#define SHT_DATA         TRISAbits.TRISA0       /* Data tx/rx pin */
-#define SHT_DATA_DDR     LATAbits.LATA0         /* Data direction register */
+#define SHT_DATA         LATAbits.LATA0       /* Data tx/rx pin */
+#define SHT_DATA_DDR     TRISAbits.TRISA0         /* Data direction register */
 #define SHT_SCK          LATAbits.LATA1     	/* Clk pin */
 #define SHT_SCK_DDR      TRISAbits.TRISA1       /* Clk direction register */
 #define SHT_DATA_CNF     ANCON0bits.PCFG0
