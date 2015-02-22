@@ -7,6 +7,9 @@
       <logicalFolder name="f2" displayName="adc" projectFiles="true">
         <itemPath>adc/include/averaged_adc.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="irca" projectFiles="true">
+        <itemPath>irca/irca.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="sht" projectFiles="true">
         <itemPath>sht/include/sht.h</itemPath>
       </logicalFolder>
@@ -14,6 +17,7 @@
       <itemPath>bsp.h</itemPath>
       <itemPath>network_proxy.h</itemPath>
       <itemPath>interrupts.h</itemPath>
+      <itemPath>register.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +29,9 @@
       <logicalFolder name="f2" displayName="adc" projectFiles="true">
         <itemPath>adc/averaged_adc.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="irca" projectFiles="true">
+        <itemPath>irca/irca.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="f1" displayName="sht" projectFiles="true">
         <itemPath>sht/sht.c</itemPath>
       </logicalFolder>
@@ -33,6 +40,8 @@
       <itemPath>interrupts.c</itemPath>
       <itemPath>pragmas.c</itemPath>
       <itemPath>network_proxy.c</itemPath>
+      <itemPath>remap.c</itemPath>
+      <itemPath>register.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -150,6 +159,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

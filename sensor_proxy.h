@@ -3,6 +3,8 @@
 
 #include "bsp.h"
 
+void SensorProxyInit(void);
+
 void MeasureSensors(void);
 
 void EnableCO2Sensor(void);

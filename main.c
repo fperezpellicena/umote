@@ -1,9 +1,11 @@
 #include "bsp.h"
 #include "interrupts.h"
+#include "sensor_proxy.h"
 
 static void Idle(void);
 
 int main() {
+    SensorProxyInit();
     EnableNetworkInterrupt();
     EnableInterrupts();
     while (1) {

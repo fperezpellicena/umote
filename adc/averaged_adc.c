@@ -31,7 +31,7 @@ void AdcClose(void) {
  * de las entradas.
  * A continuación, promedia tantas muestras como indica el factor de conversión.
  */
-void AdcConvert(uint8_t channel, uint16_t* co2) {
+void AdcConvert(uint8_t channel, uint16_t* result) {
     uint32_t tmp = 0;
     uint8_t i = AVERAGE_FACTOR;
     ADCON0bits.CHS = channel;
@@ -40,7 +40,7 @@ void AdcConvert(uint8_t channel, uint16_t* co2) {
         ADCON0bits.GO = 1;
         tmp += AdcReadValue();
     }
-    *co2 = (uint16_t)tmp >> DIV_AVERAGE;
+    *result = (uint16_t)tmp >> DIV_AVERAGE;
 }
 
 /**
