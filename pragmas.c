@@ -8,9 +8,8 @@
 #pragma config XINST = OFF          //Extended instruction set disabled
 #pragma config CP0 = OFF            //Program memory is not code-protected
 
-#pragma config OSC = INTOSCPLL      //Internal OSC(8mhz), PLL enabled by soft
-#pragma config PLLDIV = 2           //Divide By 2(4 Mhz) to generate 96Mhz
-#pragma config CPUDIV = OSC4_PLL6   //CPU system clock divide 6
+#pragma config OSC = INTOSC         //Internal OSC(8mhz), PLL disabled
+#pragma config CPUDIV = OSC1        //CPU system clock divide 1
 
 #pragma config FCMEN = OFF          //Fail-Safe Clock Monitor disabled
 #pragma config IESO = OFF           //Two-Speed Start-up disabled

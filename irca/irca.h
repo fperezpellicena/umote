@@ -17,34 +17,38 @@
 #define IRCA1_TMP_DDR           TRISCbits.TRISC2    /* IRCA temperature */
 
 /* PWM OUTPUT CONFIGURATION FOR VPULSE */
-#define IRCA1_CLK_DDR    TRISCbits.TRISC0    /* Vpulse */
-#define IRCA1_RPIN       RPOR11              /* Remap-pin register */
-#define IRCA1_TIMER      14                  /* Remap-pin register */
-#define IRCA1_REG_PERIOD PR2                 /* Vpulse period */
-#define IRCA1_DUTY       CCPR1L              /* Vpulse period */
-#define IRCA1_TMR        T2CON               /* Timer counter */
-#define IRCA1_CCP        CCP1CON             /* Timer counter */
-#define IRCA1_PERIOD     255                 /* Period */
-#define IRCA1_PRESCALE   0b00000010          /* Prescaler */
-#define IRCA1_CCP_PWM    0b00001100          /* PWM mode */
+#define IRCA1_PULSE_DDR    TRISCbits.TRISC0    /* Vpulse */
+#define IRCA1_PULSE        LATCbits.LATC0     /* Vpulse */
+
+/* SPI interface */
+#define LMP91051_CS_DDR     TRISBbits.TRISB3
+#define LMP91051_CS         LATBbits.LATB3
+
+#define LMP91051_SDI_DDR         TRISBbits.TRISB5
+#define LMP91051_SDO_DDR         TRISBbits.TRISB4
+#define LMP91051_SCK_DDR         TRISBbits.TRISB2
+#define LMP91051_SWC_DDR         TRISAbits.TRISA2
+#define LMP91051_SWC             LATAbits.LATA2
+
+
 
 /*...........................................................................*/
 /* Class IrcA1Data sensor data */
-typedef struct IrcA1Data IrcA1Data;
+typedef struct IrcAData IrcAData;
 
-struct IrcA1Data {
+struct IrcAData {
     uint16_t out;
     uint16_t tmp;
     uint16_t com;
 };
 
-void Irca1Init(void);
+void IrcaInit(void);
 
-void Irca1PowerUp(void);
+void IrcaInitInterface(void);
 
-void Irca1DisableLamp(void);
+void IrcaDisableLamp(void);
 
-void Irca1EnableLamp(void);
+void IrcaEnableLamp(void);
 
 #endif	/* IRCA_H */
 

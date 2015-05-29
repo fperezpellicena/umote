@@ -1,12 +1,14 @@
 #include "bsp.h"
 #include "interrupts.h"
 #include "sensor_proxy.h"
+#include "xbee/../digi_api.h"
 
 static void Idle(void);
 
 int main() {
+    BspInit();
+    XBeeInit();
     SensorProxyInit();
-    EnableNetworkInterrupt();
     EnableInterrupts();
     while (1) {
         //        Idle();
@@ -40,4 +42,3 @@ static void Idle(void) {
     Sleep();
     Nop();
 }
-

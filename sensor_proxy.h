@@ -13,5 +13,9 @@ void StartCO2SensorDelayed(void);
 
 BOOL MustEnableCO2Sensor(void);
 
+BOOL MustToggleLampPulse(void);
+
+void ToggleLampPulse(void);
+
 #endif	/* SENSOR_PROXY_H */
 

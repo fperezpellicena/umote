@@ -5,5 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+void BspInit(void);
+
 #endif	/* BSP_H */
 

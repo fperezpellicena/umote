@@ -46,9 +46,9 @@ typedef struct {
 } ShtData;
 
 /* Init pins and registers*/
-void Sht11_init(void);
+void Sht11Init(void);
 
 /* Measures temperature and humidity */
-uint8_t Sht11_measure(ShtData* data);
+uint8_t Sht11Measure(ShtData* data);
 
 #endif /* sht11_h */

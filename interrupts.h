@@ -3,7 +3,5 @@
 
 void EnableInterrupts(void);
 
-void EnableNetworkInterrupt(void);
-
 #endif	/* INTERRUPTS_H */
 

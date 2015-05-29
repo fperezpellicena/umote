@@ -4,12 +4,12 @@
 void RegisterLockIO(void) {
     EECON2 = 0x55;
     EECON2 = 0xAA;
-    PPSCONbits.IOLOCK = 0;
+    PPSCONbits.IOLOCK = 1;
 }
 
 void RegisterUnLockIO(void) {
     EECON2 = 0x55;
     EECON2 = 0xAA;
-    PPSCONbits.IOLOCK =1;
+    PPSCONbits.IOLOCK = 0;
 }
 

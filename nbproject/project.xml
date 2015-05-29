@@ -2,7 +2,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>umote</name>
+            <name>umote-irca</name>
             <creation-uuid>eb14d613-f1a3-4184-b50e-82a26ac5eeb8</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>

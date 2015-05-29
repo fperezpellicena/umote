@@ -10,9 +10,9 @@ CND_CONF=default
 CND_DISTDIR=dist
 TMPDIR=build/${CND_CONF}/${IMAGE_TYPE}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/umote.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-OUTPUT_BASENAME=umote.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
-PACKAGE_TOP_DIR=umote/
+OUTPUT_PATH=dist/${CND_CONF}/${IMAGE_TYPE}/umote-irca.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+OUTPUT_BASENAME=umote-irca.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+PACKAGE_TOP_DIR=umote-irca.x/
 
 # Functions
 function checkReturnCode
@@ -57,15 +57,15 @@ mkdir -p ${TMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory ${TMPDIR}/umote/bin
+makeDirectory ${TMPDIR}/umote-irca.x/bin
 copyFileToTmpDir "${OUTPUT_PATH}" "${TMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/package/umote.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/package/umote-irca.x.tar
 cd ${TMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/umote.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/package/umote-irca.x.tar *
 checkReturnCode
 
 # Cleanup

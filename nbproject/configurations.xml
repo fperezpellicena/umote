@@ -13,6 +13,11 @@
       <logicalFolder name="f1" displayName="sht" projectFiles="true">
         <itemPath>sht/include/sht.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f4" displayName="xbee" projectFiles="true">
+        <itemPath>xbee/include/digi_api.h</itemPath>
+        <itemPath>xbee/include/digi_serial.h</itemPath>
+        <itemPath>xbee/include/payload.h</itemPath>
+      </logicalFolder>
       <itemPath>sensor_proxy.h</itemPath>
       <itemPath>bsp.h</itemPath>
       <itemPath>network_proxy.h</itemPath>
@@ -35,6 +40,16 @@
       <logicalFolder name="f1" displayName="sht" projectFiles="true">
         <itemPath>sht/sht.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f4" displayName="xbee" projectFiles="true">
+        <itemPath>xbee/digi_api.c</itemPath>
+        <itemPath>xbee/digi_hw.c</itemPath>
+        <itemPath>xbee/digi_send.c</itemPath>
+        <itemPath>xbee/digi_serial.c</itemPath>
+        <itemPath>xbee/digi_transmit_request.c</itemPath>
+        <itemPath>xbee/payload.c</itemPath>
+        <itemPath>xbee/digi_join.c</itemPath>
+        <itemPath>xbee/digi_at_request.c</itemPath>
+      </logicalFolder>
       <itemPath>main.c</itemPath>
       <itemPath>sensor_proxy.c</itemPath>
       <itemPath>interrupts.c</itemPath>
@@ -42,6 +57,7 @@
       <itemPath>network_proxy.c</itemPath>
       <itemPath>remap.c</itemPath>
       <itemPath>register.c</itemPath>
+      <itemPath>bsp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -52,6 +68,7 @@
   <sourceRootList>
     <Elem>sht</Elem>
     <Elem>adc/include</Elem>
+    <Elem>xbee</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -91,7 +108,8 @@
       <HI-TECH-COMP>
         <property key="asmlist" value="true"/>
         <property key="define-macros" value=""/>
-        <property key="extra-include-directories" value="sht\include;adc\include"/>
+        <property key="extra-include-directories"
+                  value="sht\include;adc\include;xbee\include"/>
         <property key="identifier-length" value="255"/>
         <property key="operation-mode" value="free"/>
         <property key="opt-xc8-compiler-strict_ansi" value="false"/>
@@ -193,7 +211,7 @@
         <property key="programoptions.testmodeentrymethod" value="VPPFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="3.5"/>
+        <property key="voltagevalue" value="2.5"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>

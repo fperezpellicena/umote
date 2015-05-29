@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=umote
+PROJECTNAME=umote-irca.X
 
 # Active Configuration
 DEFAULTCONF=default

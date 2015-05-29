@@ -2,45 +2,68 @@
 #include "sht/include/sht.h"
 #include "adc/include/averaged_adc.h"
 #include "irca/irca.h"
+#include <math.h>
 
-#include <spi.h>
+#define TIMER_CONFIG                    T0_16BIT | T0_SOURCE_INT | TIMER_INT_ON | T0_PS_1_256
+#define ENABLE_DELAYED_OVF_RATE         9
+#define PULSE_DELAYED_OVF_RATE          4
 
-#define TIMER_CONFIG        T0_16BIT | T0_SOURCE_INT | TIMER_INT_ON | T0_PS_1_256
-#define OVF_RATE            9
-#define DEV_CONFIG_REG      (0x60)                   // FIXME PGA1 ON, PGA2 ON, CMN_Mode = 1.15V
+volatile static uint8_t enableDelayedCounter;
+volatile static uint8_t pulseDelayedCounter;
 
-static uint8_t overflowCount;
+static void PowerUpCO2Sensor(void);
+static void PowerDownCO2Sensor(void);
+static void PowerUpSHT11(void);
+static void PowerDownSHT11(void);
 
-static void EnableSHT11(void);
 static void MeasureSHT11(void);
-static void DisableSHT11(void);
 
 static void MeasureCO2(void);
 static void DisableCO2(void);
 static void StopCO2SensorDelayed(void);
 
-static void PowerUpCO2Sensor(void);
-static void PowerDownCO2Sensor(void);
+static BOOL CO2SensorEnableTimerOverflow(void);
+static void ClearCO2SensorEnableTimerInterrupt(void);
 
-static BOOL CO2SensorTimerOverflow(void);
-static void ClearCO2SensorTimerInterrupt(void);
+static BOOL CO2SensorPulseTimerOverflow(void);
+static void ClearCO2SensorPulseTimerInterrupt(void);
 
 static void LMP91051Init(void);
 
-static ShtData shtData;
-static IrcA1Data irca1Data;
+ShtData shtData;
+IrcAData ircaData;
 
 void SensorProxyInit(void) {
-    Sht11_init();
-    Irca1Init();
+    Sht11Init();
+    IrcaInit();
 }
 
 void MeasureSensors(void) {
-    EnableSHT11();
+    // SHT11 sequence
+    PowerUpSHT11();
     MeasureSHT11();
-    DisableSHT11();
+    PowerDownSHT11();
+    // IRCA sequence
     MeasureCO2();
     DisableCO2();
+}
+
+static void PowerUpCO2Sensor(void) {
+    TRISCbits.TRISC1 = 0;
+    PORTCbits.RC1 = 1;
+}
+
+static void PowerDownCO2Sensor(void) {
+    PORTCbits.RC1 = 0;
+}
+
+static void PowerUpSHT11(void) {
+    TRISAbits.TRISA5 = 0;
+    PORTAbits.RA5 = 1;
+}
+
+static void PowerDownSHT11(void) {
+    PORTAbits.RA5 = 0;
 }
 
 /**
@@ -49,28 +72,13 @@ void MeasureSensors(void) {
 void EnableCO2Sensor(void) {
     StopCO2SensorDelayed();
     PowerUpCO2Sensor();
-    Irca1EnableLamp();
-    LMP91051Init();
+    IrcaEnableLamp();
+    IrcaInitInterface();
 }
 
-static void PowerUpCO2Sensor(void) {
-    TRISCbits.TRISC5 = 0;
-    PORTCbits.RC5 = 1;
-}
-
- // Configure LMP registers via SPI
-static void LMP91051Init(void) {
-    OpenSPI(SPI_FOSC_4, MODE_00, SMPEND);
-    WriteSPI(DEV_CONFIG_REG);
-    // Debug
-    uint8_t config = ReadSPI();
-    if (config != DEV_CONFIG_REG){
-        // Error
-    }
-}
-
-static void PowerDownCO2Sensor(void) {
-    PORTCbits.RC5 = 0;
+static void DisableCO2(void) {
+    PowerDownCO2Sensor();
+    IrcaDisableLamp();
 }
 
 void StartCO2SensorDelayed(void) {
@@ -93,48 +101,60 @@ static void StopCO2SensorDelayed(void) {
 }
 
 BOOL MustEnableCO2Sensor(void) {
-    if (CO2SensorTimerOverflow()) {
-        ClearCO2SensorTimerInterrupt();
+    if (CO2SensorEnableTimerOverflow()) {
+        ClearCO2SensorEnableTimerInterrupt();
         StartCO2SensorDelayed();
-        overflowCount++;
+        enableDelayedCounter++;
     }
-    if (overflowCount == OVF_RATE) {
-        overflowCount = 0;
+    if (enableDelayedCounter == ENABLE_DELAYED_OVF_RATE) {
+        enableDelayedCounter = 0;
         return true;
     }
     return false;
 }
 
-static BOOL CO2SensorTimerOverflow(void) {
+void ToggleLampPulse(void) {
+    IRCA1_PULSE = !IRCA1_PULSE;
+}
+
+BOOL MustToggleLampPulse(void) {
+    if (CO2SensorPulseTimerOverflow()) {
+        pulseDelayedCounter++;
+    }
+    ClearCO2SensorPulseTimerInterrupt();
+    if (pulseDelayedCounter == PULSE_DELAYED_OVF_RATE) {
+        pulseDelayedCounter = 0;
+        return true;
+    }
+    return false;
+}
+
+static BOOL CO2SensorPulseTimerOverflow(void) {
+    return PIR1bits.TMR1IF && PIE1bits.TMR1IE;
+}
+
+static void ClearCO2SensorPulseTimerInterrupt(void) {
+    PIR1bits.TMR1IF = 0;
+}
+
+static BOOL CO2SensorEnableTimerOverflow(void) {
     return INTCONbits.T0IF && INTCONbits.T0IE;
 }
 
-static void ClearCO2SensorTimerInterrupt(void) {
+static void ClearCO2SensorEnableTimerInterrupt(void) {
     INTCONbits.TMR0IF = 0;
 }
 
 static void MeasureCO2(void) {
     AdcInit();
-    AdcConvert(IRCA1_OUT_AN_CH, &irca1Data.out);
-    AdcConvert(IRCA1_TMP_AN_CH, &irca1Data.tmp);
-    AdcConvert(IRCA1_COMMON_AN_CH, &irca1Data.com);
+    AdcConvert(IRCA1_OUT_AN_CH, &ircaData.out);
+    AdcConvert(IRCA1_TMP_AN_CH, &ircaData.tmp);
+    AdcConvert(IRCA1_COMMON_AN_CH, &ircaData.com);
     AdcClose();
 }
 
-static void DisableCO2(void) {
-    PowerDownCO2Sensor();
-    Irca1DisableLamp();
-}
-
-static void EnableSHT11(void) {
-    TRISAbits.TRISA5 = 0;
-    PORTAbits.RA5 = 1;
-}
-
 static void MeasureSHT11(void) {
-    Sht11_measure(&shtData);
+    Sht11Measure(&shtData);
 }
 
-static void DisableSHT11(void) {
-    PORTAbits.RA5 = 0;
-}
+

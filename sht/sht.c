@@ -17,19 +17,19 @@
  *           ___     ___
  * SCK : ___|   |___|   |______
  */
-static void Sht11_start(void);
+static void Sht11Start(void);
 
 /* Reads a byte form the Sensibus and gives an acknowledge in case of "ack=1" */
-static uint8_t Sht11_read(uint8_t ack);
+static uint8_t Sht11Read(uint8_t ack);
 
 /* Writes a byte on the Sensibus and checks the acknowledge */
-static uint8_t Sht11_write(uint8_t value);
+static uint8_t Sht11Write(uint8_t value);
 
 
 /* Makes a measurement (humidity/temperature) with checksum */
-static uint8_t Sht11_measureParam(uint16_t *p_value, uint8_t *p_checksum, uint8_t mode);
+static uint8_t Sht11MeasureParam(uint16_t *p_value, uint8_t *p_checksum, uint8_t mode);
 
-void Sht11_init() {
+void Sht11Init() {
     SHT_DATA_CNF = 1;
     SHT_SCK_CNF = 1;
     SHT_DATA = 1;
@@ -38,17 +38,17 @@ void Sht11_init() {
     SHT_SCK = 0;
 }
 
-uint8_t Sht11_measure(ShtData* data) {
+uint8_t Sht11Measure(ShtData* data) {
     uint8_t error = 0;
     // Get measures
-    error += Sht11_measureParam(&data->temperature.i, &data->tempChk,
+    error += Sht11MeasureParam(&data->temperature.i, &data->tempChk,
             SHT_MEASURE_TEMP);
-    error += Sht11_measureParam(&data->humidity.i, &data->humiChk,
+    error += Sht11MeasureParam(&data->humidity.i, &data->humiChk,
             SHT_MEASURE_HUMI);
     return error;
 }
 
-static uint8_t Sht11_write(uint8_t value) {
+static uint8_t Sht11Write(uint8_t value) {
     uint8_t i, error = 0;
     //shift bit for masking
     for (i = 0x80; i > 0; i /= 2) {
@@ -75,7 +75,7 @@ static uint8_t Sht11_write(uint8_t value) {
     return error; //error=1 in case of no acknowledge
 }
 
-static uint8_t Sht11_read(uint8_t ack) {
+static uint8_t Sht11Read(uint8_t ack) {
     uint8_t i, val = 0;
     SHT_DATA_DDR = 1;
     SHT_DATA = 1;
@@ -104,7 +104,7 @@ static uint8_t Sht11_read(uint8_t ack) {
 
 //----------------------------------------------------------------------------------
 
-static void Sht11_start(void) {
+static void Sht11Start(void) {
     SHT_DATA = 1;
     SHT_SCK = 0; //Initial state
     Delay10TCYx(10);
@@ -121,15 +121,15 @@ static void Sht11_start(void) {
     SHT_SCK = 0;
 }
 
-static uint8_t Sht11_measureParam(uint16_t *p_value, uint8_t *p_checksum, uint8_t mode) {
+static uint8_t Sht11MeasureParam(uint16_t *p_value, uint8_t *p_checksum, uint8_t mode) {
     uint8_t error = 0;
     SHT_DATA_DDR = 0;
     SHT_DATA = 1;
-    Sht11_start(); //transmission start
+    Sht11Start(); //transmission start
     switch (mode) { //send command to sensor
-        case SHT_MEASURE_TEMP: error += Sht11_write(SHT_MEASURE_TEMP);
+        case SHT_MEASURE_TEMP: error += Sht11Write(SHT_MEASURE_TEMP);
             break;
-        case SHT_MEASURE_HUMI: error += Sht11_write(SHT_MEASURE_HUMI);
+        case SHT_MEASURE_HUMI: error += Sht11Write(SHT_MEASURE_HUMI);
             break;
         default: break;
     }
@@ -137,10 +137,10 @@ static uint8_t Sht11_measureParam(uint16_t *p_value, uint8_t *p_checksum, uint8_
     SHT_DATA_DDR = 1;
     while (SHT_DATA_PIN == 1);
     // Read two bytes response
-    *(p_value) = Sht11_read(SHT_ACK); //read the first byte (MSB)
+    *(p_value) = Sht11Read(SHT_ACK); //read the first byte (MSB)
     *(p_value) = *(p_value) << 8;
-    *(p_value) += Sht11_read(SHT_ACK); //read the second byte (LSB)
-    *p_checksum = Sht11_read(SHT_NACK); //read checksum
+    *(p_value) += Sht11Read(SHT_ACK); //read the second byte (LSB)
+    *p_checksum = Sht11Read(SHT_NACK); //read checksum
 
     return error;
 }
