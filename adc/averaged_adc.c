@@ -21,10 +21,6 @@ void AdcInit() {
     ADCON0bits.ADON = 0; /* Start off powered */
 }
 
-void AdcClose(void) {
-    ADCON0bits.ADON = 0; /* Power off */
-}
-
 /**
  * Devuelve una muestra promedio de AVERAGE_FACTOR muestras.
  * Inicia el proceso tomando una muestra dummy para compensar el efecto del ruido
@@ -35,12 +31,14 @@ void AdcConvert(uint8_t channel, uint16_t* result) {
     uint32_t tmp = 0;
     uint8_t i = AVERAGE_FACTOR;
     ADCON0bits.CHS = channel;
+    ADCON0bits.ADON = 1;    // Power on
     AdcCalibrate();
     while (i--) {
         ADCON0bits.GO = 1;
         tmp += AdcReadValue();
     }
     *result = (uint16_t)tmp >> DIV_AVERAGE;
+    ADCON0bits.ADON = 0;    // Power off
 }
 
 /**

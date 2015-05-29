@@ -1,6 +1,5 @@
-#include "../bsp.h"
 #include "irca.h"
-#include "../register.h"
+#include "../adc/include/averaged_adc.h"
 #include <spi.h>
 #include <pps.h>
 
@@ -16,48 +15,33 @@
 
 static void Irca1InitIO(void);
 static void Irca1InitPulseWave(void);
-static void CsbPulse(void);
+static void IrcaWriteConfig(uint8_t config);
 
 static bool error;
 static uint8_t config;
 
-/* Init sensor struct and hw associated */
+// Init sensor struct and hw associated
 void IrcaInit(void) {
+    AdcInit();
     Irca1InitIO();
     Irca1InitPulseWave();
 }
 
-void IrcaInitInterface(void) {
+void IrcaMeasure(IrcAData* data) {
+    IrcaWriteConfig(DEV_CONFIG_ACT);
+    AdcConvert(IRCA1_OUT_AN_CH, &data->out);
+    IrcaWriteConfig(DEV_CONFIG_REF);
+    AdcConvert(IRCA1_OUT_AN_CH, &data->com);
+    AdcConvert(IRCA1_TMP_AN_CH, &data->tmp);
+}
+
+static void IrcaWriteConfig(uint8_t config) {
     LMP91051_CS = 0;
-    LMP91051_SWC = 0;
     OpenSPI2(SPI_FOSC_16, MODE_11, SMPEND);
     // Configure device registers
     WriteSPI2(DEV_CONFIG_WRITE);
-    WriteSPI2(DEV_CONFIG_ACT);
-    CsbPulse();
-    // Enable reading commmands
-    WriteSPI2(SDIO_CONFIG_WRITE);
-    WriteSPI2(0xFE);
-    CsbPulse();
-    WriteSPI2(SDIO_CONFIG_WRITE);
-    WriteSPI2(0xED);
-    CsbPulse();
-    // We're allowed to read now
-    WriteSPI2(DEV_CONFIG_READ);
-    OpenSPI2(SPI_FOSC_4, MODE_00, SMPMID);
-    LMP91051_SWC = 1;
-    config = ReadSPI2();
+    WriteSPI2(config);
     LMP91051_CS = 1;
-    if (config != DEV_CONFIG_ACT) {
-        // Error
-        error = 1;
-    }
-}
-
-static void CsbPulse(void) {
-    LMP91051_CS = 1;
-    Delay1TCYx(1);
-    LMP91051_CS = 0;
 }
 
 void IrcaEnableLamp(void) {
@@ -69,16 +53,15 @@ void IrcaDisableLamp(void) {
 }
 
 static void Irca1InitIO(void) {
-    IRCA1_OUT_CNF = 0; /* LMP91051 as analog pin */
-    IRCA1_OUT_DDR = 1; /* LMP91051 output */
-    IRCA1_COMMON_CNF = 0;
-    IRCA1_COMMON_DDR = 1;
-    IRCA1_TMP_CNF = 0; /* IRCA temperature analog pin */
-    IRCA1_TMP_DDR = 1; /* IRCA temperature as input */
-    IRCA1_PULSE_DDR = 0; /* IRCA lamp output */
-    IRCA1_PULSE = 0; /* Initally low */
-    LMP91051_CS_DDR = 0; /* Chip select output */
-    LMP91051_CS = 1; /* Disabled */
+    LMP91051_SWC = 0;   // Switch fixed to write direction communication
+    IRCA1_OUT_CNF = 0;  // LMP91051 as analog pin
+    IRCA1_OUT_DDR = 1;  // LMP91051 output
+    IRCA1_TMP_CNF = 0; // IRCA temperature analog pin
+    IRCA1_TMP_DDR = 1; // IRCA temperature as input
+    IRCA1_PULSE_DDR = 0; // IRCA lamp output
+    IRCA1_PULSE = 0; // Initally low
+    LMP91051_CS_DDR = 0; // Chip select output
+    LMP91051_CS = 1; // Disabled
     // SPI config.
     LMP91051_SDI_DDR = 1;
     LMP91051_SDO_DDR = 0;

@@ -14,9 +14,6 @@ void EnableInterrupts(void) {
     PIR1 = 0x00;
     PIR2 = 0x00;
     PIR3 = 0x00;
-    // All analog inputs to ADC are by default digital
-    ANCON0 = 0xFF;
-    ANCON1 = 0xFF;
     // Configure interrupts
     RCONbits.IPEN = 1;
     INTCONbits.PEIE = 1;

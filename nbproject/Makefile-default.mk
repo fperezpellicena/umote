@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=adc/averaged_adc.c irca/irca.c sht/sht.c xbee/digi_api.c xbee/digi_hw.c xbee/digi_send.c xbee/digi_serial.c xbee/digi_transmit_request.c xbee/payload.c xbee/digi_join.c xbee/digi_at_request.c main.c sensor_proxy.c interrupts.c pragmas.c network_proxy.c remap.c register.c bsp.c
+SOURCEFILES_QUOTED_IF_SPACED=adc/averaged_adc.c irca/irca.c sht/sht.c xbee/digi_api.c xbee/digi_hw.c xbee/digi_send.c xbee/digi_serial.c xbee/digi_transmit_request.c xbee/payload.c xbee/digi_join.c xbee/digi_at_request.c main.c sensor_proxy.c interrupts.c pragmas.c network_proxy.c bsp.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc/averaged_adc.p1 ${OBJECTDIR}/irca/irca.p1 ${OBJECTDIR}/sht/sht.p1 ${OBJECTDIR}/xbee/digi_api.p1 ${OBJECTDIR}/xbee/digi_hw.p1 ${OBJECTDIR}/xbee/digi_send.p1 ${OBJECTDIR}/xbee/digi_serial.p1 ${OBJECTDIR}/xbee/digi_transmit_request.p1 ${OBJECTDIR}/xbee/payload.p1 ${OBJECTDIR}/xbee/digi_join.p1 ${OBJECTDIR}/xbee/digi_at_request.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/sensor_proxy.p1 ${OBJECTDIR}/interrupts.p1 ${OBJECTDIR}/pragmas.p1 ${OBJECTDIR}/network_proxy.p1 ${OBJECTDIR}/remap.p1 ${OBJECTDIR}/register.p1 ${OBJECTDIR}/bsp.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/adc/averaged_adc.p1.d ${OBJECTDIR}/irca/irca.p1.d ${OBJECTDIR}/sht/sht.p1.d ${OBJECTDIR}/xbee/digi_api.p1.d ${OBJECTDIR}/xbee/digi_hw.p1.d ${OBJECTDIR}/xbee/digi_send.p1.d ${OBJECTDIR}/xbee/digi_serial.p1.d ${OBJECTDIR}/xbee/digi_transmit_request.p1.d ${OBJECTDIR}/xbee/payload.p1.d ${OBJECTDIR}/xbee/digi_join.p1.d ${OBJECTDIR}/xbee/digi_at_request.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/sensor_proxy.p1.d ${OBJECTDIR}/interrupts.p1.d ${OBJECTDIR}/pragmas.p1.d ${OBJECTDIR}/network_proxy.p1.d ${OBJECTDIR}/remap.p1.d ${OBJECTDIR}/register.p1.d ${OBJECTDIR}/bsp.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/adc/averaged_adc.p1 ${OBJECTDIR}/irca/irca.p1 ${OBJECTDIR}/sht/sht.p1 ${OBJECTDIR}/xbee/digi_api.p1 ${OBJECTDIR}/xbee/digi_hw.p1 ${OBJECTDIR}/xbee/digi_send.p1 ${OBJECTDIR}/xbee/digi_serial.p1 ${OBJECTDIR}/xbee/digi_transmit_request.p1 ${OBJECTDIR}/xbee/payload.p1 ${OBJECTDIR}/xbee/digi_join.p1 ${OBJECTDIR}/xbee/digi_at_request.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/sensor_proxy.p1 ${OBJECTDIR}/interrupts.p1 ${OBJECTDIR}/pragmas.p1 ${OBJECTDIR}/network_proxy.p1 ${OBJECTDIR}/bsp.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/adc/averaged_adc.p1.d ${OBJECTDIR}/irca/irca.p1.d ${OBJECTDIR}/sht/sht.p1.d ${OBJECTDIR}/xbee/digi_api.p1.d ${OBJECTDIR}/xbee/digi_hw.p1.d ${OBJECTDIR}/xbee/digi_send.p1.d ${OBJECTDIR}/xbee/digi_serial.p1.d ${OBJECTDIR}/xbee/digi_transmit_request.p1.d ${OBJECTDIR}/xbee/payload.p1.d ${OBJECTDIR}/xbee/digi_join.p1.d ${OBJECTDIR}/xbee/digi_at_request.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/sensor_proxy.p1.d ${OBJECTDIR}/interrupts.p1.d ${OBJECTDIR}/pragmas.p1.d ${OBJECTDIR}/network_proxy.p1.d ${OBJECTDIR}/bsp.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/adc/averaged_adc.p1 ${OBJECTDIR}/irca/irca.p1 ${OBJECTDIR}/sht/sht.p1 ${OBJECTDIR}/xbee/digi_api.p1 ${OBJECTDIR}/xbee/digi_hw.p1 ${OBJECTDIR}/xbee/digi_send.p1 ${OBJECTDIR}/xbee/digi_serial.p1 ${OBJECTDIR}/xbee/digi_transmit_request.p1 ${OBJECTDIR}/xbee/payload.p1 ${OBJECTDIR}/xbee/digi_join.p1 ${OBJECTDIR}/xbee/digi_at_request.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/sensor_proxy.p1 ${OBJECTDIR}/interrupts.p1 ${OBJECTDIR}/pragmas.p1 ${OBJECTDIR}/network_proxy.p1 ${OBJECTDIR}/remap.p1 ${OBJECTDIR}/register.p1 ${OBJECTDIR}/bsp.p1
+OBJECTFILES=${OBJECTDIR}/adc/averaged_adc.p1 ${OBJECTDIR}/irca/irca.p1 ${OBJECTDIR}/sht/sht.p1 ${OBJECTDIR}/xbee/digi_api.p1 ${OBJECTDIR}/xbee/digi_hw.p1 ${OBJECTDIR}/xbee/digi_send.p1 ${OBJECTDIR}/xbee/digi_serial.p1 ${OBJECTDIR}/xbee/digi_transmit_request.p1 ${OBJECTDIR}/xbee/payload.p1 ${OBJECTDIR}/xbee/digi_join.p1 ${OBJECTDIR}/xbee/digi_at_request.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/sensor_proxy.p1 ${OBJECTDIR}/interrupts.p1 ${OBJECTDIR}/pragmas.p1 ${OBJECTDIR}/network_proxy.p1 ${OBJECTDIR}/bsp.p1
 
 # Source Files
-SOURCEFILES=adc/averaged_adc.c irca/irca.c sht/sht.c xbee/digi_api.c xbee/digi_hw.c xbee/digi_send.c xbee/digi_serial.c xbee/digi_transmit_request.c xbee/payload.c xbee/digi_join.c xbee/digi_at_request.c main.c sensor_proxy.c interrupts.c pragmas.c network_proxy.c remap.c register.c bsp.c
+SOURCEFILES=adc/averaged_adc.c irca/irca.c sht/sht.c xbee/digi_api.c xbee/digi_hw.c xbee/digi_send.c xbee/digi_serial.c xbee/digi_transmit_request.c xbee/payload.c xbee/digi_join.c xbee/digi_at_request.c main.c sensor_proxy.c interrupts.c pragmas.c network_proxy.c bsp.c
 
 
 CFLAGS=
@@ -209,22 +209,6 @@ ${OBJECTDIR}/network_proxy.p1: network_proxy.c  nbproject/Makefile-${CND_CONF}.m
 	@-${MV} ${OBJECTDIR}/network_proxy.d ${OBJECTDIR}/network_proxy.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/network_proxy.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
-${OBJECTDIR}/remap.p1: remap.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/remap.p1.d 
-	@${RM} ${OBJECTDIR}/remap.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"sht/include" -I"adc/include" -I"xbee/include" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/remap.p1  remap.c 
-	@-${MV} ${OBJECTDIR}/remap.d ${OBJECTDIR}/remap.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/remap.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/register.p1: register.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/register.p1.d 
-	@${RM} ${OBJECTDIR}/register.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"sht/include" -I"adc/include" -I"xbee/include" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/register.p1  register.c 
-	@-${MV} ${OBJECTDIR}/register.d ${OBJECTDIR}/register.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/register.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
 ${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/bsp.p1.d 
@@ -361,22 +345,6 @@ ${OBJECTDIR}/network_proxy.p1: network_proxy.c  nbproject/Makefile-${CND_CONF}.m
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"sht/include" -I"adc/include" -I"xbee/include" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/network_proxy.p1  network_proxy.c 
 	@-${MV} ${OBJECTDIR}/network_proxy.d ${OBJECTDIR}/network_proxy.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/network_proxy.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/remap.p1: remap.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/remap.p1.d 
-	@${RM} ${OBJECTDIR}/remap.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"sht/include" -I"adc/include" -I"xbee/include" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/remap.p1  remap.c 
-	@-${MV} ${OBJECTDIR}/remap.d ${OBJECTDIR}/remap.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/remap.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/register.p1: register.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/register.p1.d 
-	@${RM} ${OBJECTDIR}/register.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=default,+asm,+asmfile,-speed,+space,-debug --addrqual=ignore --mode=free -P -N255 -I"sht/include" -I"adc/include" -I"xbee/include" --warn=0 --asmlist --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,+plib --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/register.p1  register.c 
-	@-${MV} ${OBJECTDIR}/register.d ${OBJECTDIR}/register.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/register.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/bsp.p1: bsp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 

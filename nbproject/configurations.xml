@@ -22,7 +22,6 @@
       <itemPath>bsp.h</itemPath>
       <itemPath>network_proxy.h</itemPath>
       <itemPath>interrupts.h</itemPath>
-      <itemPath>register.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -55,8 +54,6 @@
       <itemPath>interrupts.c</itemPath>
       <itemPath>pragmas.c</itemPath>
       <itemPath>network_proxy.c</itemPath>
-      <itemPath>remap.c</itemPath>
-      <itemPath>register.c</itemPath>
       <itemPath>bsp.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

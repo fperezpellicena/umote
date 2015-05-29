@@ -16,9 +16,6 @@ static void PowerDownCO2Sensor(void);
 static void PowerUpSHT11(void);
 static void PowerDownSHT11(void);
 
-static void MeasureSHT11(void);
-
-static void MeasureCO2(void);
 static void DisableCO2(void);
 static void StopCO2SensorDelayed(void);
 
@@ -41,10 +38,11 @@ void SensorProxyInit(void) {
 void MeasureSensors(void) {
     // SHT11 sequence
     PowerUpSHT11();
-    MeasureSHT11();
+    Sht11Measure(&shtData);
     PowerDownSHT11();
     // IRCA sequence
-    MeasureCO2();
+    ircaData.tmp = 0;
+    IrcaMeasure(&ircaData);
     DisableCO2();
 }
 
@@ -73,7 +71,6 @@ void EnableCO2Sensor(void) {
     StopCO2SensorDelayed();
     PowerUpCO2Sensor();
     IrcaEnableLamp();
-    IrcaInitInterface();
 }
 
 static void DisableCO2(void) {
@@ -144,17 +141,3 @@ static BOOL CO2SensorEnableTimerOverflow(void) {
 static void ClearCO2SensorEnableTimerInterrupt(void) {
     INTCONbits.TMR0IF = 0;
 }
-
-static void MeasureCO2(void) {
-    AdcInit();
-    AdcConvert(IRCA1_OUT_AN_CH, &ircaData.out);
-    AdcConvert(IRCA1_TMP_AN_CH, &ircaData.tmp);
-    AdcConvert(IRCA1_COMMON_AN_CH, &ircaData.com);
-    AdcClose();
-}
-
-static void MeasureSHT11(void) {
-    Sht11Measure(&shtData);
-}
-
-
