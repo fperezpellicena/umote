@@ -42,6 +42,8 @@ void MeasureSensors(void) {
     PowerDownSHT11();
     // IRCA sequence
     ircaData.tmp = 0;
+    ircaData.out = 0;
+    ircaData.com = 0;
     IrcaMeasure(&ircaData);
     DisableCO2();
 }

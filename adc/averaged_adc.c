@@ -13,7 +13,7 @@ static uint16_t AdcReadValue(void);
  */
 void AdcInit() {
     ADCON0bits.VCFG = 0;
-    ADCON1bits.ADFM = 1; /* Left adjust */
+    ADCON1bits.ADFM = 1; /* Right adjust */
     ADCON1bits.ACQT = 0; /* Automatic acquisition time */
     ADCON1bits.ADCS = 0; /* Clk Fosc/2 */
     ANCON1bits.VBGEN = 0;
