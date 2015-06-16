@@ -33,7 +33,7 @@ void PayloadInit(Payload* payload) {
 /*..........................................................................*/
 
 /* Add one byte to the list */
-void Payload_putByte(Payload* payload, const uint8_t element) {
+void PayloadPutByte(Payload* payload, const uint8_t element) {
     if (payload->size < MAX_PAYLOAD - 1) {
         payload->data[payload->size] = element;
         payload->size++;
@@ -57,22 +57,22 @@ void PayloadPutWord(Payload* payload, const uint16_t element) {
 /*..........................................................................*/
 
 /* Append all elements to the list */
-void Payload_append(Payload* to, const Payload* from) {
+void PayloadAppend(Payload* to, const Payload* from) {
     uint8_t i = 0;
     while (i < from->size) {
-        Payload_putByte(to, from->data[i++]);
+        PayloadPutByte(to, from->data[i++]);
     }
 }
 
 /*..........................................................................*/
 /* */
-void Payload_putString(Payload* payload, const uint8_t* string) {
-    char* buffer = (char*) payload->data;
+void PayloadPutString(Payload* payload, const uint8_t* string) {
+    char* buffer = (char*) &payload->data[payload->size];
     sprintf(buffer, (const char*) string);
     payload->size += strlen((char*)string);
 }
 
-void Payload_putRAMString(Payload* payload, const uint8_t* string) {
+void PayloadPutRAMString(Payload* payload, const uint8_t* string) {
     char* buffer = (char*) payload->data;
     strcpy(&(buffer[payload->size]), (char*) string);
     payload->size += strlen((char*)string);

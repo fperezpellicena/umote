@@ -5,6 +5,7 @@
 #include "xbee/include/digi_api.h"
 
 const uint8_t COORDINATOR_ADDRESS[8] = {0x00, 0x13, 0xA2, 0x00, 0x40, 0xBB, 0x3D, 0xD3};
+const uint8_t SENSORS[2] = {SHT_ID, IRCA_ID};
 const uint8_t BROADCAST_RADIUS = 0x00;
 const uint8_t TRANSMIT_OPTIONS = 0x00;
 
@@ -24,6 +25,8 @@ void SendMeasures(void) {
     Payload payload;
     XBeeCreatePacket(&packet);
     PayloadInit(&payload);
+    PayloadPutByte(&payload, MOBILE);
+    PayloadPutString(&payload, SENSORS);
     PayloadPutWord(&payload, shtData.temperature.i);
     PayloadPutWord(&payload, shtData.humidity.i);
     PayloadPutWord(&payload, ircaData.out);
